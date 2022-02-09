@@ -44,5 +44,6 @@ async def WithoutCS(user: discord.Member, ctx):#function to end the cycle and se
     await ctx.send(message)
 
 BotToken = os.environ['token']
+#BotToken="ODg4NDQzMDU5ODQ5ODA1ODg1.YUSxEw.QIups3F9fBrX6p_5FTdmhQNPpB8"
 keep_alive()
 client.run(BotToken)
