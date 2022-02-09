@@ -68,6 +68,25 @@ async def botkaCS(ctx, user: discord.Member):
         await ctx.send('User is not in a channel.')
 
 
+@client.command(name='k0mputkaCS')
+async def botkaCS(ctx):
+    # grab the user's voice channel
+    voice_channel=ctx.author.voice.channel
+    channel=None
+    # only play music if user is in a voice channel
+    if voice_channel!= None:
+        # create StreamPlayer
+        vc= await voice_channel.connect()
+        #add a message on top
+        await ctx.send("@everyone"+" vreme za k0mputka")
+        source=discord.FFmpegPCMAudio('audio_files/kompetkaCS.mp3')
+        player=vc.play(source)
+        await asyncio.sleep(3)
+        # disconnect after the player has finished
+        await vc.disconnect()
+    else:
+        await ctx.send('User is not in a channel.')
+
 @tasks.loop(minutes=0.5)
 async def messageInterval(user: discord.Member, ctx):
     nowTime=datetime.datetime.now()#get a datetime to check if we are in school to repeat
