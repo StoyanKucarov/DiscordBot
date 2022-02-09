@@ -1,3 +1,4 @@
+import codes #delete before pulling
 import os
 import discord
 import re
@@ -43,7 +44,6 @@ async def WithoutCS(user: discord.Member, ctx):#function to end the cycle and se
     message="{} haide bez cs".format(user.mention)
     await ctx.send(message)
 
-BotToken = os.environ['token']
-#BotToken="ODg4NDQzMDU5ODQ5ODA1ODg1.YUSxEw.QIups3F9fBrX6p_5FTdmhQNPpB8"
+BotToken = codes.token #change to os.environ['token'] 
 keep_alive()
 client.run(BotToken)

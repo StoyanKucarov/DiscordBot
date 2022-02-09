@@ -153,3 +153,4 @@ cython_debug/
 
 #personal ignores
 .vs/
+codes.py
