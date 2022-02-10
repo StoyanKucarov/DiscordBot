@@ -101,7 +101,7 @@ async def botkaCS(ctx, vers="last"):
 async def messageInterval(user: discord.Member, ctx):
     nowTime=datetime.datetime.now()#get a datetime to check if we are in school to repeat
     nowTimeInt=nowTime.hour*60+nowTime.minute#the hours are turned to minutes and added to the rest minutes
-    if nowTimeInt>=(0*8*60+30) and nowTimeInt<=(14*60*100):#work if between 8:30 and 14:00
+    if nowTimeInt>=(8*60+30) and nowTimeInt<=(14*60*100):#work if between 8:30 and 14:00
         message="{} are cs4e e botka".format(user.mention)
         await ctx.send(message)
     else:
