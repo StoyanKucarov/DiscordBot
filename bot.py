@@ -1,6 +1,8 @@
+import codes #delete before pulling
 import os
 import discord
 import re
+import datetime
 from discord.ext import commands, tasks
 from hangintherebuster import keep_alive
 client = commands.Bot(command_prefix="!")
@@ -10,20 +12,38 @@ async def on_ready():
   .format(client))
 
 
-@client.command(description="ping chovek")
-async def vrunkaizacs(ctx, enabled, usar: discord.Member, interval=45):
-    if enabled.lower() == "stop":
-        messageInterval.cancel()
+@client.command(description="ping chovek", name='cs')
+async def vrunkaizacs(ctx, user: discord.Member, enabled="start", interval=1):
+    if enabled.lower() == "stop":#check for stop or if the time is 
+        try:
+            await WithoutCS(user, ctx)
+        except Exception as e:
+            print(str(e))
     elif enabled.lower() == "start":
-        messageInterval.change_interval(minutes=int(interval))
-        messageInterval.start(usar)
+        try:
+            messageInterval.change_interval(minutes=int(interval))
+            messageInterval.start(user, ctx)
+        except Exception as e:
+            print(str(e))
 
-@tasks.loop(minutes=45)
-async def messageInterval(user: discord.Member, message=""):
-    message="{} are cs4e e botka".format(user.mention)
-    channel=client.get_channel(708961064313946124)
-    await channel.send(message)
+@tasks.loop(minutes=0.5)
+async def messageInterval(user: discord.Member, ctx):
+    nowTime=datetime.datetime.now()#get a datetime to check if we are in school to repeat
+    nowTimeInt=nowTime.hour*60+nowTime.minute#the hours are turned to minutes and added to the rest minutes
+    if nowTimeInt>=(8*60+30) and nowTimeInt<=(14*60):#work if between 8:30 and 14:00
+        message="{} are cs4e e botka".format(user.mention)
+        await ctx.send(message)
+    else:
+        try:
+            await WithoutCS(user, ctx)
+        except Exception as e:
+            print(str(e))
 
-BotToken = os.environ['token']
+async def WithoutCS(user: discord.Member, ctx):#function to end the cycle and sent a message
+    messageInterval.cancel()
+    message="{} haide bez cs".format(user.mention)
+    await ctx.send(message)
+
+BotToken = codes.token #change to os.environ['token'] 
 keep_alive()
 client.run(BotToken)
