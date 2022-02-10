@@ -32,8 +32,12 @@ async def vrunkaizacs(ctx, user: discord.Member, enabled="start", interval=1):
 @client.command(name='vikaiCS')
 async def VikaiCS(ctx, user: discord.Member, vers="last"):
     # grab the user's voice channel
-    voice_channel=user.voice.channel
-    channel=None
+    try:
+        voice_channel=user.voice.channel
+        channel=None
+    except Exception as e:
+        print(str(e))
+        await ctx.send('No channel found')
     # only play music if user is in a voice channel
     if voice_channel!= None:
         # create StreamPlayer
@@ -55,23 +59,31 @@ async def VikaiCS(ctx, user: discord.Member, vers="last"):
 @client.command(name='b0tkaCS')
 async def botkaCS(ctx, user: discord.Member, vers="last"):
     # grab the user's voice channel
-    voice_channel=user.voice.channel
-    channel=None
+    try:
+        voice_channel=user.voice.channel
+        channel=None
+    except Exception as e:
+        print(str(e))
+        await ctx.send('No channel found')
     # only play music if user is in a voice channel
     if voice_channel!= None:
-        # create StreamPlayer
-        vc= await voice_channel.connect()
-        #add a message on top
-        mes=makeBotName(user.name)
-        message=mes.format(user.mention)
-        await ctx.send(message)
-        source=discord.FFmpegPCMAudio('audio_files/botkaCSLegacy.mp3')
-        if vers=="last":
-            source=discord.FFmpegPCMAudio('audio_files/botkaCS.mp3')
-        player=vc.play(source)
-        await asyncio.sleep(3)
-        # disconnect after the player has finished
-        await vc.disconnect()
+        try:
+            # create StreamPlayer
+            vc= await voice_channel.connect()
+            #add a message on top
+            mes=makeBotName(user.name)
+            message=mes.format(user.mention)
+            await ctx.send(message)
+            source=discord.FFmpegPCMAudio('audio_files/botkaCSLegacy.mp3')
+            if vers=="last":
+                source=discord.FFmpegPCMAudio('audio_files/botkaCS.mp3')
+            player=vc.play(source)
+            await asyncio.sleep(3)
+            # disconnect after the player has finished
+            await vc.disconnect()
+        except Exception as e:
+            print(str(e))
+            await ctx.send('Error in connecting')
     else:
         await ctx.send('User is not in a channel.')
 
@@ -79,21 +91,29 @@ async def botkaCS(ctx, user: discord.Member, vers="last"):
 @client.command(name='k0mputkaCS')
 async def botkaCS(ctx, vers="last"):
     # grab the user's voice channel
-    voice_channel=ctx.author.voice.channel
-    channel=None
+    try:
+        voice_channel=ctx.author.voice.channel
+        channel=None
+    except Exception as e:
+        print(str(e))
+        await ctx.send('No channel found')
     # only play music if user is in a voice channel
     if voice_channel!= None:
-        # create StreamPlayer
-        vc= await voice_channel.connect()
-        #add a message on top
-        await ctx.send("@everyone"+" vreme za k0mputka")
-        source=discord.FFmpegPCMAudio('audio_files/kompetkaCSLegacy.mp3')
-        if vers=="last":
-            source=discord.FFmpegPCMAudio('audio_files/kompetkaCS.mp3')
-        player=vc.play(source)
-        await asyncio.sleep(3)
-        # disconnect after the player has finished
-        await vc.disconnect()
+        try:
+            # create StreamPlayer
+            vc= await voice_channel.connect()
+            #add a message on top
+            await ctx.send("@everyone"+" vreme za k0mputka")
+            source=discord.FFmpegPCMAudio('audio_files/kompetkaCSLegacy.mp3')
+            if vers=="last":
+                source=discord.FFmpegPCMAudio('audio_files/kompetkaCS.mp3')
+            player=vc.play(source)
+            await asyncio.sleep(3)
+            # disconnect after the player has finished
+            await vc.disconnect()
+        except Exception as e:
+            print(str(e))
+            await ctx.send('Error in connecting')
     else:
         await ctx.send('User is not in a channel.')
 
@@ -129,8 +149,9 @@ def makeBotName(name):#make bot name ex:Stelyo -> b0tlyo
 @client.event
 async def on_message(message):
   chance=random.random()
-  if chance<=0.02 and message.author.id!=940642505953796106:
-    await message.channel.send("tiho e slow")
+  mes="{} tiho e slow".format(message.author.mention)
+  if chance<=0.05 and message.author.id!=940642505953796106:
+    await message.channel.send(mes)
   await client.process_commands(message)
 
 
