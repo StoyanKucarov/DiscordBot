@@ -30,7 +30,7 @@ async def vrunkaizacs(ctx, user: discord.Member, enabled="start", interval=1):
 
 
 @client.command(name='vikaiCS')
-async def VikaiCS(ctx, user: discord.Member):
+async def VikaiCS(ctx, user: discord.Member, vers="last"):
     # grab the user's voice channel
     voice_channel=user.voice.channel
     channel=None
@@ -38,7 +38,9 @@ async def VikaiCS(ctx, user: discord.Member):
     if voice_channel!= None:
         # create StreamPlayer
         vc= await voice_channel.connect()
-        source=discord.FFmpegPCMAudio('audio_files/startCS.mp3')
+        source=discord.FFmpegPCMAudio('audio_files/startCSLegacy.mp3')
+        if vers=="last":
+            source=discord.FFmpegPCMAudio('audio_files/startCS.mp3')
         player=vc.play(source)
         await asyncio.sleep(3)
         # disconnect after the player has finished
@@ -47,7 +49,7 @@ async def VikaiCS(ctx, user: discord.Member):
         await ctx.send('User is not in a channel.')
 
 @client.command(name='b0tkaCS')
-async def botkaCS(ctx, user: discord.Member):
+async def botkaCS(ctx, user: discord.Member, vers="last"):
     # grab the user's voice channel
     voice_channel=user.voice.channel
     channel=None
@@ -59,7 +61,9 @@ async def botkaCS(ctx, user: discord.Member):
         mes=makeBotName(user.name)
         message=mes.format(user.mention)
         await ctx.send(message)
-        source=discord.FFmpegPCMAudio('audio_files/botkaCS.mp3')
+        source=discord.FFmpegPCMAudio('audio_files/botkaCSLegacy.mp3')
+        if vers=="last":
+            source=discord.FFmpegPCMAudio('audio_files/botkaCS.mp3')
         player=vc.play(source)
         await asyncio.sleep(3)
         # disconnect after the player has finished
@@ -69,7 +73,7 @@ async def botkaCS(ctx, user: discord.Member):
 
 
 @client.command(name='k0mputkaCS')
-async def botkaCS(ctx):
+async def botkaCS(ctx, vers="last"):
     # grab the user's voice channel
     voice_channel=ctx.author.voice.channel
     channel=None
@@ -79,7 +83,9 @@ async def botkaCS(ctx):
         vc= await voice_channel.connect()
         #add a message on top
         await ctx.send("@everyone"+" vreme za k0mputka")
-        source=discord.FFmpegPCMAudio('audio_files/kompetkaCS.mp3')
+        source=discord.FFmpegPCMAudio('audio_files/kompetkaCSLegacy.mp3')
+        if vers=="last":
+            source=discord.FFmpegPCMAudio('audio_files/kompetkaCS.mp3')
         player=vc.play(source)
         await asyncio.sleep(3)
         # disconnect after the player has finished
