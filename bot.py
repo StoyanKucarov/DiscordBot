@@ -39,7 +39,6 @@ async def VikaiCS(ctx, user: discord.Member, vers="last"):
         channel=None
     except Exception as e:
         print(str(e))
-        await ctx.send('No channel found')
     # only play music if user is in a voice channel
     if voice_channel!= None:
         # create StreamPlayer
@@ -67,7 +66,6 @@ async def botkaCS(ctx, user: discord.Member, vers="last"):
         channel=None
     except Exception as e:
         print(str(e))
-        await ctx.send('No channel found')
     # only play music if user is in a voice channel
     if voice_channel!= None:
         try:
@@ -100,7 +98,6 @@ async def kompetkaCS(ctx, vers="last"):
         channel=None
     except Exception as e:
         print(str(e))
-        await ctx.send('No channel found')
     # only play music if user is in a voice channel
     if voice_channel!= None:
         try:
