@@ -33,6 +33,7 @@ async def vrunkaizacs(ctx, user: discord.Member, enabled="start", interval=1):
 @client.command(name='vikaiCS')
 async def VikaiCS(ctx, user: discord.Member, vers="last"):
     # grab the user's voice channel
+    voice_channel=None
     try:
         voice_channel=user.voice.channel
         channel=None
@@ -60,6 +61,7 @@ async def VikaiCS(ctx, user: discord.Member, vers="last"):
 @client.command(name='b0tkaCS')
 async def botkaCS(ctx, user: discord.Member, vers="last"):
     # grab the user's voice channel
+    voice_channel=None
     try:
         voice_channel=user.voice.channel
         channel=None
@@ -92,6 +94,7 @@ async def botkaCS(ctx, user: discord.Member, vers="last"):
 @client.command(name='k0mputkaCS')
 async def kompetkaCS(ctx, vers="last"):
     # grab the user's voice channel
+    voice_channel=None
     try:
         voice_channel=ctx.author.voice.channel
         channel=None
