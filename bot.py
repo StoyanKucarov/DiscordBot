@@ -1,3 +1,4 @@
+import codes
 import os
 import discord
 import re
@@ -89,7 +90,7 @@ async def botkaCS(ctx, user: discord.Member, vers="last"):
 
 
 @client.command(name='k0mputkaCS')
-async def botkaCS(ctx, vers="last"):
+async def kompetkaCS(ctx, vers="last"):
     # grab the user's voice channel
     try:
         voice_channel=ctx.author.voice.channel
@@ -116,6 +117,35 @@ async def botkaCS(ctx, vers="last"):
             await ctx.send('Error in connecting')
     else:
         await ctx.send('User is not in a channel.')
+
+@client.command(name='narkomanin')
+async def narkomanin(ctx,  user: discord.Member):
+    # grab the user's voice channel
+    try:
+        voice_channel=user.voice.channel
+        channel=None
+    except Exception as e:
+        print(str(e))
+        await ctx.send('No channel found')
+    # only play music if user is in a voice channel
+    if voice_channel!= None:
+        try:
+            # create StreamPlayer
+            vc= await voice_channel.connect()
+            #add a message on top
+            message="{} ei narkomanin".format(user.mention)
+            await ctx.send(message)
+            source=discord.FFmpegPCMAudio('audio_files/narkomanin.mp3')
+            player=vc.play(source)
+            await asyncio.sleep(3)
+            # disconnect after the player has finished
+            await vc.disconnect()
+        except Exception as e:
+            print(str(e))
+            await ctx.send('Error in connecting')
+    else:
+        await ctx.send('User is not in a channel.')
+
 
 @tasks.loop(minutes=0.5)
 async def messageInterval(user: discord.Member, ctx):
@@ -156,6 +186,6 @@ async def on_message(message):
 
 
 
-BotToken = os.environ['token'] 
+BotToken = codes.token #os.environ['token']
 keep_alive()
 client.run(BotToken)
