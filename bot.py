@@ -1,4 +1,3 @@
-import codes #delete before pulling
 import os
 import discord
 import re
@@ -146,6 +145,7 @@ def makeBotName(name):#make bot name ex:Stelyo -> b0tlyo
     else:
         return "{} b0t"+name[3:]
 
+
 @client.event
 async def on_message(message):
   chance=random.random()
@@ -154,12 +154,8 @@ async def on_message(message):
     await message.channel.send(mes)
   await client.process_commands(message)
 
-def IsVasilenRandom():
-    isTwo=random.randint(1, 100)
-    if isTwo<=2:
-        return True
-    return False
 
-BotToken = codes.token #change to os.environ['token'] 
+
+BotToken = os.environ['token'] 
 keep_alive()
 client.run(BotToken)
