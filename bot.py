@@ -1,25 +1,18 @@
-import codes #delete before pulling
 import os
 import discord
 import re
 import datetime
 import asyncio
 from discord.ext import commands, tasks
-import sys, traceback
 from discord import FFmpegPCMAudio
 from hangintherebuster import keep_alive
+client = commands.Bot(command_prefix="!")
+@client.event
+async def on_ready():
+  print('{0.user} on standby'
+  .format(client))
 
 
-# Below cogs represents our folder our cogs are in. Following is the file name. So 'audio.py' in cogs, would be cogs.audio
-# Think of it like a dot path import
-initial_extensions = ['cogs.audio', 'cogs.text_individ']
-bot = commands.Bot(command_prefix="!")
-
-# Here we load our extensions(cogs) listed above in [initial_extensions].
-if __name__ == '__main__':
-    for extension in initial_extensions:
-        bot.load_extension(extension)
-=======
 @client.command(description="ping chovek", name='CS')
 async def vrunkaizacs(ctx, user: discord.Member, enabled="start", interval=1):
     if enabled.lower() == "stop":#stop the cycle with command
@@ -106,10 +99,10 @@ async def messageInterval(user: discord.Member, ctx):
         except Exception as e:
             print(str(e))
 
-
-@bot.event
-async def on_ready():
-    print('{0.user} on standby'.format(bot))
+async def WithoutCS(user: discord.Member, ctx):#function to end the cycle and sent a message
+    messageInterval.cancel()
+    message="{} haide bez cs".format(user.mention)
+    await ctx.send(message)
 
 def makeBotName(name):#make bot name ex:Stelyo -> b0tlyo
     if len(name)<=3:
@@ -121,6 +114,6 @@ def makeBotName(name):#make bot name ex:Stelyo -> b0tlyo
     else:
         return "{} b0t"+name[3:]
 
-BotToken = os.environ['token'] #change to os.environ['token'] 
+BotToken = os.environ['token'] 
 keep_alive()
-bot.run(BotToken)
+client.run(BotToken)
