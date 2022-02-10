@@ -13,4 +13,3 @@ Need to install: https://github.com/BtbN/FFmpeg-Builds/releases <br />
 Tutorial: https://www.youtube.com/watch?v=M_6_GbDc39Q&ab_channel=JamesS <br />
 PyNaCl:<br />
 Write in the cmd: pip install -U discord.py[voice] <br />
-Maybe I forgot something, maybe not
