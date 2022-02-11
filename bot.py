@@ -186,6 +186,6 @@ async def on_message(message):
 
 
 
-BotToken = codes.token #os.environ['token']
+BotToken = os.environ['token'] #os.environ['token']
 keep_alive()
 client.run(BotToken)

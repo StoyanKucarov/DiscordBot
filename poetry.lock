@@ -59,6 +59,14 @@ python-versions = ">=3.6"
 colorama = {version = "*", markers = "platform_system == \"Windows\""}
 
 [[package]]
+name = "codes"
+version = "0.1.5"
+description = "useful code records"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "colorama"
 version = "0.4.4"
 description = "Cross-platform colored terminal text."
@@ -198,7 +206,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "f0247dd83ca2aa089f1025245e907ebcb5f513b11ef84c3f6539e5da5ba5b05f"
+content-hash = "524f6316b6f7c6050b62f4d736487c812f56029fc1fcfef9b443ba9dae95d769"
 
 [metadata.files]
 aiohttp = [
@@ -255,6 +263,10 @@ chardet = [
 click = [
     {file = "click-8.0.3-py3-none-any.whl", hash = "sha256:353f466495adaeb40b6b5f592f9f91cb22372351c84caeb068132442a4518ef3"},
     {file = "click-8.0.3.tar.gz", hash = "sha256:410e932b050f5eed773c4cda94de75971c89cdb3155a72a0831139a79e5ecb5b"},
+]
+codes = [
+    {file = "codes-0.1.5-py3-none-any.whl", hash = "sha256:c8104d6638899bd96bf512d6c272929fec7215672b84a145f20d4c80d29759fb"},
+    {file = "codes-0.1.5.tar.gz", hash = "sha256:fef5a14fba9d7495ae5d62c08704ec9cbcaac5948fb7f81ea75d98bb3d7c17d6"},
 ]
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
