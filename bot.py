@@ -53,7 +53,7 @@ async def VikaiCS(ctx, user: discord.Member, vers="last"):
             await vc.disconnect()
         except Exception as e:
             print(str(e))
-            await ctx.send('Error in connecting')
+            await ctx.send('Audio error')
     else:
         await ctx.send('User is not in a channel.')
 
@@ -66,15 +66,22 @@ async def botkaCS(ctx, user: discord.Member, vers="last"):
         channel=None
     except Exception as e:
         print(str(e))
+        await ctx.send('Couldnt connect')
+    try:
+        #add a message on top
+        mes=makeBotName(user.name)
+        await user.edit(nick=mes)
+        message=user.mention+" ei botka"
+        await ctx.send(message)
+    except Exception as e:
+        print(str(e))
+        await ctx.send('Couldnt make them into full bot')
+
     # only play music if user is in a voice channel
     if voice_channel!= None:
         try:
             # create StreamPlayer
             vc= await voice_channel.connect()
-            #add a message on top
-            mes=makeBotName(user.name)
-            message=mes.format(user.mention)
-            await ctx.send(message)
             source=discord.FFmpegPCMAudio('audio_files/botkaCSLegacy.mp3')
             if vers=="last":
                 source=discord.FFmpegPCMAudio('audio_files/botkaCS.mp3')
@@ -84,7 +91,7 @@ async def botkaCS(ctx, user: discord.Member, vers="last"):
             await vc.disconnect()
         except Exception as e:
             print(str(e))
-            await ctx.send('Error in connecting')
+            await ctx.send('Error in playing audio')
     else:
         await ctx.send('User is not in a channel.')
 
@@ -98,13 +105,18 @@ async def kompetkaCS(ctx, vers="last"):
         channel=None
     except Exception as e:
         print(str(e))
+    try:
+        #add a message on top
+        await ctx.send("@everyone"+" vreme za k0mputka")
+    except Exception as e:
+        print(str(e))
+        await ctx.send('Couldnt make them into full bot')
     # only play music if user is in a voice channel
     if voice_channel!= None:
         try:
             # create StreamPlayer
             vc= await voice_channel.connect()
             #add a message on top
-            await ctx.send("@everyone"+" vreme za k0mputka")
             source=discord.FFmpegPCMAudio('audio_files/kompetkaCSLegacy.mp3')
             if vers=="last":
                 source=discord.FFmpegPCMAudio('audio_files/kompetkaCS.mp3')
@@ -167,13 +179,13 @@ async def WithoutCS(user: discord.Member, ctx):#function to end the cycle and se
 
 def makeBotName(name):#make bot name ex:Stelyo -> b0tlyo
     if len(name)<=3:
-        return "{} b0t"+name
+        return "b0t"+name
     elif len(name)==4:
-        return "{} b0t"+name[2:]
+        return "b0t"+name[2:]
     elif len(name)==5:
-        return "{} b0t"+name[2:]
+        return "b0t"+name[2:]
     else:
-        return "{} b0t"+name[3:]
+        return "b0t"+name[3:]
 
 
 @client.event
